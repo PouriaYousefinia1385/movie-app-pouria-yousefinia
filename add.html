@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اضافه کردن فیلم</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>اضافه کردن فیلم جدید</h1>
+    </header>
+
+    <div class="add-movie-form">
+        <form id="add-movie-form" onsubmit="submitMovie(event)">
+            <label for="movie-title">نام:</label>
+            <input type="text" id="movie-title" required>
+            <label for="movie-genre">ژانر:</label>
+            <input type="text" id="movie-genre" required>
+            <label for="movie-rating">امتیاز:</label>
+            <input type="number" id="movie-rating" min="0" max="10" step="0.1" required>
+            <label for="movie-description">توضیحات:</label>
+            <textarea id="movie-description" rows="4" required></textarea>
+            <button type="submit">اضافه کردن</button>
+        </form>
+    </div>
+
+    <footer>
+        <button onclick="location.href='index.html'">خانه</button>
+        <button onclick="location.href='library.html'">کتابخانه</button>
+        <button onclick="location.href='settings.html'">تنظیمات</button>
+        <button onclick="location.href='add.html'">اضافه کردن</button>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
