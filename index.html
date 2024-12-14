@@ -37,7 +37,7 @@
 
 
     <div id="main-content">
-        <div class="movies-grid" id="movies-grid"></div>
+        <div id="movieList"></div>
         <div class="movie-details" id="movie-details"></div>
     </div>
 
@@ -67,73 +67,32 @@
     </div>
 
     <script>
-const movies = [
-    { title: 'Inception', genre: 'Action', rating: 8.8, description: 'یک دزد اسرار را از طریق اشتراک‌گذاری رویاها می‌دزدد.' },
-    { title: 'The Notebook', genre: 'Romance', rating: 7.8, description: 'داستانی از عشق و از دست دادن در طول زمان.' },
-    { title: 'Get Out', genre: 'Horror', rating: 7.7, description: 'مردی اسرار وحشتناکی درباره خانواده دخترش کشف می‌کند.' },
-    { title: 'Superbad', genre: 'Comedy', rating: 7.6, description: 'دوست‌های دبیرستانی تلاش می‌کنند قبل از دانشگاه جشن بگیرند.' },
-    { title: 'The Dark Knight', genre: 'Action', rating: 9.0, description: 'بتمن با بزرگترین دشمن خود، جوکر، روبرو می‌شود.' },
-    { title: 'Pride and Prejudice', genre: 'Romance', rating: 8.1, description: 'عشق و طبقه اجتماعی در انگلستان قرن 19 برخورد می‌کنند.' },
-    { title: 'A Quiet Place', genre: 'Horror', rating: 7.5, description: 'یک خانواده باید سکوت کنند تا از موجودات مرگبار جان سالم به در ببرند.' },
-    { title: '21 Jump Street', genre: 'Comedy', rating: 7.2, description: 'دو پلیس به‌طور مخفیانه در یک دبیرستان فعالیت می‌کنند.' },
-    { title: 'Mad Max: Fury Road', genre: 'Action', rating: 8.1, description: 'یک جنگ جاده‌ای در دنیای پساآپوکالیپتیک برای بقا.' },
-    { title: 'Titanic', genre: 'Romance', rating: 7.8, description: 'داستان عاشقانه‌ای که در کشتی تایتانیک رخ می‌دهد.' },
-    { title: 'The Conjuring', genre: 'Horror', rating: 7.5, description: 'محققان ماورایی به خانواده‌ای در بحران کمک می‌کنند.' },
-    { title: 'The Hangover', genre: 'Comedy', rating: 7.7, description: 'دوستان در لاس وگاس از شب گذشته هیچ خاطره‌ای ندارند.' },
-    { title: 'John Wick', genre: 'Action', rating: 7.4, description: 'یک آدمکش بازنشسته به دنبال انتقام است.' },
-    { title: 'La La Land', genre: 'Romance', rating: 8.0, description: 'یک نوازنده جاز و بازیگر در لس آنجلس عاشق یکدیگر می‌شوند.' },
-    { title: 'Hereditary', genre: 'Horror', rating: 7.3, description: 'یک خانواده پس از یک تراژدی، اسرار تاریکی را کشف می‌کند.' },
-    { title: 'Step Brothers', genre: 'Comedy', rating: 6.9, description: 'دو مرد بالغ به ناتنی تبدیل می‌شوند و هرج و مرج رخ می‌دهد.' },
-    { title: 'Avengers: Endgame', genre: 'Action', rating: 8.4, description: 'انتقام‌جویان برای یک نبرد نهایی جمع می‌شوند.' },
-    { title: 'The Fault in Our Stars', genre: 'Romance', rating: 7.7, description: 'دو نوجوان در حالی که با سرطان مبارزه می‌کنند عاشق یکدیگر می‌شوند.' },
-    { title: 'The Shining', genre: 'Horror', rating: 8.4, description: 'مردی به تدریج در یک هتل دورافتاده به جنون می‌رود.' },
-    { title: 'Anchorman', genre: 'Comedy', rating: 7.2, description: 'ماجراهای یک تیم خبری در دهه 1970.' },
-    { title: 'Spider-Man: No Way Home', genre: 'Action', rating: 8.3, description: 'اسپایدرمن با چالش‌های چندجهانی روبرو می‌شود.' },
-    { title: 'Crazy, Stupid, Love.', genre: 'Romance', rating: 7.4, description: 'مردی پس از جدایی از همسرش با عشق روبرو می‌شود.' },
-    { title: 'Us', genre: 'Horror', rating: 6.9, description: 'یک خانواده توسط دوقلوهای شیطانی خود مورد ترور قرار می‌گیرد.' },
-    { title: 'Borat', genre: 'Comedy', rating: 7.3, description: 'سفر تمسخرآمیز یک روزنامه‌نگار قزاق در آمریکا.' },
-    { title: 'Black Panther', genre: 'Action', rating: 7.3, description: 'پادشاه واکاندا از مردم خود دفاع می‌کند.' },
-    { title: 'Me Before You', genre: 'Romance', rating: 7.4, description: 'یک مراقب عاشق کارفرمای معلول خود می‌شود.' },
-    { title: 'It Follows', genre: 'Horror', rating: 6.8, description: 'یک زن جوان توسط یک نیروی ماورایی تعقیب می‌شود.' },
-    { title: 'The Grand Budapest Hotel', genre: 'Comedy', rating: 8.1, description: 'ماجراهای یک پیشخدمت هتل و شاگرد او.' },
-    { title: 'Mission: Impossible - Fallout', genre: 'Action', rating: 7.8, description: 'ایتان هانت در ماموریتی خطرناک‌تر از همیشه قرار می‌گیرد.' },
-    { title: 'The Vow', genre: 'Romance', rating: 6.8, description: 'مردی به همسرش کمک می‌کند تا پس از فراموشی دوباره عشقشان را بیابد.' },
-    { title: 'Midsommar', genre: 'Horror', rating: 7.1, description: 'گروهی در یک جشن ترسناک در سوئد شرکت می‌کنند.' },
-    { title: 'Clueless', genre: 'Comedy', rating: 6.8, description: 'یک نوجوان شیک‌پوش عشق و دوستی را در زندگی دبیرستانی‌اش هدایت می‌کند.' },
-    { title: 'The Bourne Identity', genre: 'Action', rating: 7.9, description: 'یک جاسوس مبتلا به فراموشی به دنبال هویت خود است.' },
-    { title: 'A Star is Born', genre: 'Romance', rating: 7.6, description: 'یک نوازنده به یک خواننده جوان کمک می‌کند تا به شهرت برسد.' },
-    { title: 'Sinister', genre: 'Horror', rating: 6.8, description: 'یک نویسنده فیلم‌های disturbing را در خانه‌اش کشف می‌کند.' },
-    { title: 'The Truman Show', genre: 'Comedy', rating: 8.1, description: 'مردی متوجه می‌شود که زندگی‌اش یک برنامه تلویزیونی است.' },
-    { title: 'Casino Royale', genre: 'Action', rating: 8.0, description: 'جیمز باند در یک بازی پوکر پرخطر شرکت می‌کند.' },
-    { title: 'The Holiday', genre: 'Romance', rating: 6.9, description: 'دو زن خانه‌های خود را عوض می‌کنند و عاشق می‌شوند.' },
-    { title: 'The Ring', genre: 'Horror', rating: 7.1, description: 'یک نوار ویدیویی نفرین‌شده به یک سری مرگ‌ها منجر می‌شود.' },
-    { title: 'Napoleon Dynamite', genre: 'Comedy', rating: 6.9, description: 'یک نوجوان عجیب و غریب زندگی دبیرستانی خود را طی می‌کند.' },
-    { title: 'The Avengers', genre: 'Action', rating: 8.0, description: 'قوی‌ترین قهرمانان زمین برای مبارزه با تهدید بیگانه متحد می‌شوند.' },
-    { title: 'Romeo + Juliet', genre: 'Romance', rating: 6.7, description: 'یک بازنگری مدرن از تراژدی شکسپیر.' },
-    { title: 'The Cabin in the Woods', genre: 'Horror', rating: 7.0, description: 'نوجوانان با اسرار ترسناکی در یک کلبه دورافتاده مواجه می‌شوند.' },
-    { title: 'Game Night', genre: 'Comedy', rating: 7.0, description: 'یک شب بازی به یک ماجرای واقعی معما تبدیل می‌شود.' },
-    { title: 'Top Gun: Maverick', genre: 'Action', rating: 8.3, description: 'پیت میچل یک نسل جدید از خلبان‌ها را آموزش می‌دهد.' },
-    { title: 'Before Sunrise', genre: 'Romance', rating: 8.1, description: 'یک ملاقات تصادفی ارتباط عمیقی را آغاز می‌کند.' },
-    { title: 'The Others', genre: 'Horror', rating: 7.6, description: 'یک مادر و فرزندانش یک راز ترسناک را کشف می‌کنند.' },
-];
 
 
+function displayMovies(movies) {
+    const moviesList = document.getElementById('movies-list');
+    moviesList.innerHTML = ''; // Clear existing movies
 
-        function displayMovies(filteredMovies = movies) {
-            const moviesList = document.getElementById('movies-list');
-            moviesList.innerHTML = '';
-            filteredMovies.forEach(movie => {
-                const movieCard = document.createElement('div');
-                movieCard.className = 'movie-card';
-                movieCard.innerHTML = `
-                    <h3>${movie.title}</h3>
-                    <p><strong>Genre:</strong> ${movie.genre}</p>
-                    <p><strong>Rating:</strong> ${movie.rating}</p>
-                    <p>${movie.description}</p>
-                `;
-                moviesList.appendChild(movieCard);
-            });
-        }
+    if (movies.length === 0) {
+        moviesList.innerHTML = '<p>No movies available.</p>';
+        return;
+    }
+
+    movies.forEach(movie => {
+        const movieCard = document.createElement('div');
+        movieCard.className = 'movie-card';
+        movieCard.style = 'display: inline-block; text-align: center; margin: 10px;';
+
+        movieCard.innerHTML = `
+            <img src="https://picsum.photos/150/120" alt="${movie.title}" style="border-radius: 10px;">
+            <h3>${movie.title}</h3>
+            <p><strong>Genre:</strong> ${movie.genre}</p>
+            <p><strong>Rating:</strong> ${movie.rating}</p>
+        `;
+
+        moviesList.appendChild(movieCard);
+    });
+}
 
         function filterMovies() {
     const genre = document.getElementById('genre-select').value;
@@ -170,6 +129,8 @@ const movies = [
             displayMovies();
         };
     </script>
+
+<script src="app.js"></script>
 
     <script>
         async function fetchMovies() {
